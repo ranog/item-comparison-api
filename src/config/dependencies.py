@@ -3,7 +3,7 @@ from pathlib import Path
 
 from fastapi import Depends
 
-from src.adapters.repository import JsonItemRepository, ItemRepository
+from src.adapters.repository import ItemRepository, JsonItemRepository
 from src.service_layer.services import DefaultItemService, ItemService
 
 

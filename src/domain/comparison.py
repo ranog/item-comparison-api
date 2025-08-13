@@ -49,8 +49,7 @@ class ItemComparison:
         specs_comparison = {}
         for spec in all_specs:
             specs_comparison[spec] = {
-                item.name: item.specifications.get(spec, "Não especificado")
-                for item in items
+                item.name: item.specifications.get(spec, "Não especificado") for item in items
             }
 
         return {
