@@ -77,7 +77,7 @@ def test_should_list_all_items(test_client: TestClient, created_item: Item):
 
 
 def test_should_list_items_by_ids(test_client: TestClient, created_item: Item):
-    response = test_client.get(f"/items?ids={created_item.id}")
+    response = test_client.get(f"/items?ids={created_item.id}&ids=999")
 
     assert response.status_code == status.HTTP_200_OK
     items = [Item(**item) for item in response.json()]
