@@ -1,6 +1,7 @@
 import logging
-from fastapi import status
+
 import pytest
+from fastapi import status
 
 
 @pytest.mark.asyncio
