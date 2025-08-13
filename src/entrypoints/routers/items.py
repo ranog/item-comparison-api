@@ -8,6 +8,7 @@ from src.entrypoints.handlers.items import (
     replace_item,
     update_item,
 )
+from src.entrypoints.handlers.comparison import compare_items
 
 items_router = APIRouter(tags=["item-comparison"])
 
@@ -49,4 +50,10 @@ items_router.add_api_route(
     delete_item,
     methods=["DELETE"],
     status_code=204,
+)
+
+items_router.add_api_route(
+    "/items/compare",
+    compare_items,
+    methods=["GET"],
 )

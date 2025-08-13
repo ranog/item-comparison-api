@@ -5,7 +5,7 @@ from pathlib import Path
 from tempfile import mkstemp
 from typing import Any, Dict, List, Optional, Protocol
 
-from src.domain.model import Item, ItemCreate, ItemUpdate
+from src.domain.item import Item, ItemCreate, ItemUpdate
 
 
 class ItemRepository(Protocol):

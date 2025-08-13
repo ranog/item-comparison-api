@@ -4,7 +4,7 @@ from unittest.mock import Mock
 import pytest
 from pydantic import HttpUrl
 
-from src.domain.model import Item, ItemCreate, ItemUpdate
+from src.domain.item import Item, ItemCreate, ItemUpdate
 from src.service_layer.services import DefaultItemService
 
 

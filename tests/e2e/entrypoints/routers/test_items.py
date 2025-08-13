@@ -4,7 +4,7 @@ import pytest
 from fastapi import status
 from fastapi.testclient import TestClient
 
-from src.domain.model import Item
+from src.domain.item import Item
 
 
 @pytest.fixture

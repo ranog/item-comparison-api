@@ -6,7 +6,7 @@ import pytest
 from pydantic import HttpUrl
 
 from src.adapters.repository import JsonItemRepository
-from src.domain.model import ItemCreate, ItemUpdate
+from src.domain.item import ItemCreate, ItemUpdate
 
 
 @pytest.fixture

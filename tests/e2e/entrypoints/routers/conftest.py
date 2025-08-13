@@ -1,37 +1,54 @@
-import os
 from pathlib import Path
 from typing import Generator
 
 import pytest
+from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
 from src.adapters.repository import JsonItemRepository
-from src.entrypoints.handlers.items import service
-from src.main import app
+from src.config.app import create_app
+from src.config.dependencies import get_item_service
+from src.service_layer.services import DefaultItemService
 
-# Caminhos para arquivos de teste
+# Configura o caminho do arquivo de teste
 TEST_DATA_DIR = Path("tests/data")
 TEST_ITEMS_FILE = TEST_DATA_DIR / "test_items.json"
 
-# Garante que o diretório de teste existe
-TEST_DATA_DIR.mkdir(parents=True, exist_ok=True)
 
-# Garante que o arquivo de teste está vazio no início
-if TEST_ITEMS_FILE.exists():
-    os.remove(TEST_ITEMS_FILE)
+@pytest.fixture(scope="session", autouse=True)
+def test_app() -> FastAPI:
+    """
+    Cria uma instância da aplicação específica para testes.
+    """
+    # Garante que o diretório de teste existe
+    TEST_DATA_DIR.mkdir(parents=True, exist_ok=True)
+    
+    # Cria um novo repositório específico para testes
+    repository = JsonItemRepository(TEST_ITEMS_FILE)
+    service = DefaultItemService(repository)
+    
+    # Cria a aplicação
+    app = create_app()
+    
+    # Sobrescreve a dependência do serviço
+    app.dependency_overrides[get_item_service] = lambda: service
+    
+    return app
 
 
 @pytest.fixture
-def test_repository() -> JsonItemRepository:
-    return JsonItemRepository(TEST_ITEMS_FILE)
-
-
-@pytest.fixture
-def test_client(test_repository: JsonItemRepository) -> Generator[TestClient, None, None]:
-    service.repository = test_repository
-
-    client = TestClient(app)
-
+def test_client(test_app: FastAPI) -> Generator[TestClient, None, None]:
+    """
+    Cria um cliente de teste.
+    """
+    client = TestClient(test_app)
+    
+    # Garante que o arquivo de teste está limpo antes de cada teste
+    if TEST_ITEMS_FILE.exists():
+        TEST_ITEMS_FILE.unlink()
+    
     yield client
-    if os.path.exists(TEST_ITEMS_FILE):
-        os.remove(TEST_ITEMS_FILE)
+    
+    # Limpa o arquivo após o teste
+    if TEST_ITEMS_FILE.exists():
+        TEST_ITEMS_FILE.unlink()

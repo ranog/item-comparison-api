@@ -1,7 +1,7 @@
 import pytest
 from pydantic import ValidationError
 
-from src.domain.model import Item, ItemBase, ItemCreate, ItemUpdate
+from src.domain.item import Item, ItemBase, ItemCreate, ItemUpdate
 
 
 def test_valid_item_base():

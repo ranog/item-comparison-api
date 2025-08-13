@@ -1,7 +1,7 @@
 from typing import List, Optional, Protocol
 
 from src.adapters.repository import ItemRepository
-from src.domain.model import Item, ItemCreate, ItemUpdate
+from src.domain.item import Item, ItemCreate, ItemUpdate
 
 
 class ItemService(Protocol):
