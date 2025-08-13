@@ -2,19 +2,18 @@ from typing import Any, Dict, List
 
 from fastapi import Depends, HTTPException, Query
 
+from src.config.dependencies import get_item_service
 from src.domain.comparison import ItemComparison
 from src.service_layer.services import ItemService
-from src.config.dependencies import get_item_service
-
 
 
 def compare_items(
-    item_ids: List[int] = Query(
+    ids: List[int] = Query(
         ...,
         title="IDs dos itens",
         description="Lista de IDs dos itens a serem comparados",
-        min_items=2,
-        max_items=5,
+        min_length=2,
+        max_length=5,
     ),
     service: ItemService = Depends(get_item_service),
 ) -> Dict[str, Any]:
@@ -22,7 +21,7 @@ def compare_items(
     Compara itens especificados pelos IDs.
 
     Args:
-        item_ids: Lista de IDs dos itens a serem comparados (mín: 2, máx: 5)
+        params: Parâmetros da comparação contendo os IDs dos itens
         service: Serviço de itens injetado
 
     Returns:
@@ -32,8 +31,8 @@ def compare_items(
         HTTPException: Se algum item não for encontrado ou se houver IDs duplicados
     """
     # Remove duplicatas mantendo a ordem
-    unique_ids = list(dict.fromkeys(item_ids))
-    if len(unique_ids) != len(item_ids):
+    unique_ids = list(dict.fromkeys(ids))
+    if len(unique_ids) != len(ids):
         raise HTTPException(
             status_code=400,
             detail="IDs duplicados não são permitidos na comparação",
