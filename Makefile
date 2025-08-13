@@ -6,3 +6,6 @@ install-deps:
 	@poetry install --no-root
 	@pre-commit install --hook-type commit-msg
 	@pre-commit run --all-files
+
+run: init
+	@poetry run env $(shell grep -v ^\# .env | xargs) uvicorn src.main:app --reload --port 8080
