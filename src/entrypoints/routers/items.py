@@ -1,5 +1,6 @@
 from fastapi import APIRouter
 
+from src.entrypoints.handlers.comparison import compare_items
 from src.entrypoints.handlers.items import (
     create_item,
     delete_item,
@@ -8,7 +9,6 @@ from src.entrypoints.handlers.items import (
     replace_item,
     update_item,
 )
-from src.entrypoints.handlers.comparison import compare_items
 
 items_router = APIRouter(tags=["item-comparison"])
 
@@ -17,6 +17,12 @@ PATH_ITEM_ID = "/items/{item_id}"
 items_router.add_api_route(
     "/items",
     list_items,
+    methods=["GET"],
+)
+
+items_router.add_api_route(
+    "/items/compare",
+    compare_items,
     methods=["GET"],
 )
 
@@ -50,10 +56,4 @@ items_router.add_api_route(
     delete_item,
     methods=["DELETE"],
     status_code=204,
-)
-
-items_router.add_api_route(
-    "/items/compare",
-    compare_items,
-    methods=["GET"],
 )
