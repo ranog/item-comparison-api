@@ -4,23 +4,8 @@ from src.domain.item import Item
 
 
 class ItemComparison:
-    """Classe responsável por comparar itens."""
-
     @staticmethod
     def compare_items(items: List[Item]) -> Dict[str, Any]:
-        """
-        Compara uma lista de itens e retorna as diferenças.
-
-        Args:
-            items: Lista de itens a serem comparados
-
-        Returns:
-            Dict contendo as comparações:
-            - items: Lista dos itens completos
-            - price: Informações sobre preços (min, max, diff)
-            - rating: Informações sobre avaliações
-            - specifications: Comparação de especificações
-        """
         if not items:
             return {"items": [], "specifications_comparison": {}}
 

@@ -39,10 +39,8 @@ def test_should_compare_items_successfully(
     test_client: TestClient,
     sample_items: List[Dict],
 ):
-    """Teste de comparação bem-sucedida entre itens."""
-    # Cria os itens primeiro
     created_items = []
-    for item in sample_items[:2]:  # Usa apenas 2 itens para comparação
+    for item in sample_items[:2]:
         response = test_client.post("/items", json=item)
         assert response.status_code == 201
         created_items.append(response.json())
@@ -51,33 +49,60 @@ def test_should_compare_items_successfully(
     response = test_client.get("/items/compare", params={"ids": items})
 
     assert response.status_code == 200
-    data = response.json()
-
-    # Verifica a estrutura da resposta
-    assert "items" in data
-    assert "price_analysis" in data
-    assert "rating_analysis" in data
-    assert "specifications_comparison" in data
-
-    # Verifica análise de preços
-    price_analysis = data["price_analysis"]
-    assert abs(price_analysis["lowest"] - 100.0) < 0.01
-    assert abs(price_analysis["highest"] - 150.0) < 0.01
-    assert abs(price_analysis["difference"] - 50.0) < 0.01
-
-    # Verifica análise de avaliações
-    rating_analysis = data["rating_analysis"]
-    assert abs(rating_analysis["lowest"] - 4.5) < 0.01
-    assert abs(rating_analysis["highest"] - 4.8) < 0.01
-    assert abs(rating_analysis["average"] - 4.65) < 0.01
-
-    # Verifica comparação de especificações
-    specs = data["specifications_comparison"]
-    assert "cor" in specs
-    assert "tamanho" in specs
-    assert "peso" in specs
-    assert specs["cor"]["Produto A"] == "azul"
-    assert specs["cor"]["Produto B"] == "verde"
+    assert response.json() == {
+        "items": [
+            {
+                "description": "Descrição do Produto A",
+                "id": 1,
+                "image_url": "http://example.com/imageA.jpg",
+                "name": "Produto A",
+                "price": 100.0,
+                "rating": 4.5,
+                "specifications": {
+                    "cor": "azul",
+                    "peso": "1kg",
+                    "tamanho": "M",
+                },
+            },
+            {
+                "description": "Descrição do Produto B",
+                "id": 2,
+                "image_url": "http://example.com/imageB.jpg",
+                "name": "Produto B",
+                "price": 150.0,
+                "rating": 4.8,
+                "specifications": {
+                    "cor": "verde",
+                    "peso": "1.2kg",
+                    "tamanho": "G",
+                },
+            },
+        ],
+        "price_analysis": {
+            "difference": 50.0,
+            "highest": 150.0,
+            "lowest": 100.0,
+        },
+        "rating_analysis": {
+            "average": 4.65,
+            "highest": 4.8,
+            "lowest": 4.5,
+        },
+        "specifications_comparison": {
+            "cor": {
+                "Produto A": "azul",
+                "Produto B": "verde",
+            },
+            "peso": {
+                "Produto A": "1kg",
+                "Produto B": "1.2kg",
+            },
+            "tamanho": {
+                "Produto A": "M",
+                "Produto B": "G",
+            },
+        },
+    }
 
 
 def test_should_return_422_when_comparing_less_than_two_items(
@@ -162,42 +187,35 @@ def test_should_return_400_when_comparing_duplicate_items(
     test_client: TestClient,
     sample_items: List[Dict],
 ):
-    """Teste de erro ao tentar comparar itens duplicados."""
-    # Cria um item
     response = test_client.post("/items", json=sample_items[0])
     assert response.status_code == 201
     item = response.json()
 
-    # Tenta comparar o mesmo item duas vezes
     response = test_client.get(
         "/items/compare",
-        params={"ids": [item["id"], item["id"]]},  # Lista com IDs duplicados
+        params={"ids": [item["id"], item["id"]]},
     )
 
     assert response.status_code == 400
-    data = response.json()
-    assert "IDs duplicados" in data["detail"]
+    assert response.json() == {
+        "detail": "IDs duplicados não são permitidos na comparação",
+    }
 
 
 def test_should_return_404_when_item_not_found(
     test_client: TestClient,
     sample_items: List[Dict],
 ):
-    """Teste de erro quando um dos itens não existe."""
-    # Cria um item
     response = test_client.post("/items", json=sample_items[0])
     assert response.status_code == 201
     item = response.json()
 
-    # Tenta comparar com um item que não existe
     response = test_client.get(
         "/items/compare",
-        params={"ids": [item["id"], 999]},  # Item existente e um que não existe
+        params={"ids": [item["id"], 999]},
     )
 
     assert response.status_code == 404
-    data = response.json()
-    assert "não encontrados" in data["detail"].lower() and "999" in data["detail"]
-    data = response.json()
-    assert "não encontrados" in data["detail"]
-    assert "999" in data["detail"]
+    assert response.json() == {
+        "detail": "Itens não encontrados: {999}",
+    }
