@@ -1,0 +1,227 @@
+type: collection.insomnia.rest/5.0
+name: item-comparison-api
+meta:
+  id: wrk_773f05e5a5cf40bdaa56d3b996222f04
+  created: 1755128936571
+  modified: 1755128936571
+  description: ""
+collection:
+  - url: http://localhost:8080/health_check
+    name: health_check
+    meta:
+      id: req_d70f3e07b0ec44dc95757fe03b304769
+      created: 1755129053086
+      modified: 1755129064430
+      isPrivate: false
+      description: ""
+      sortKey: -1755129053086
+    method: GET
+    headers:
+      - name: accept
+        value: application/json
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/items
+    name: list_items
+    meta:
+      id: req_745ccea83387414dbe743be29cb00a9d
+      created: 1755129113054
+      modified: 1755129148604
+      isPrivate: false
+      description: ""
+      sortKey: -1755129113054
+    method: GET
+    headers:
+      - name: accept
+        value: application/json
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/items
+    name: create_item
+    meta:
+      id: req_6a69cd04774e42b88fea9928e645901d
+      created: 1755129206920
+      modified: 1755129346821
+      isPrivate: false
+      description: ""
+      sortKey: -1755129206920
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "name": "Produto C",
+          "image_url": "http://example.com/imageB.jpg",
+          "description": "Descrição do Produto B",
+          "price": 150.0,
+          "rating": 4.8,
+          "specifications": {
+            "tamanho": "G",
+            "peso": "1.2kg"
+          }
+        }
+    headers:
+      - name: accept
+        value: application/json
+      - name: Content-Type
+        value: application/json
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/items/compare
+    name: compare_items
+    meta:
+      id: req_37eb3fc98d60404cba79a1dacc70632d
+      created: 1755129308348
+      modified: 1755129366903
+      isPrivate: false
+      description: ""
+      sortKey: -1755129308348
+    method: GET
+    parameters:
+      - name: ids
+        value: "1"
+        disabled: false
+        id: pair_c0bc1f0cc3e840fdbe7c3b928a4f3827
+      - name: ids
+        value: "3"
+        disabled: false
+        id: pair_491fb01441ad49fabc2ee4b3201b1010
+    headers:
+      - name: accept
+        value: application/json
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/items/1
+    name: get_item
+    meta:
+      id: req_f754ad272fc5410d974b700a3eb88056
+      created: 1755129436350
+      modified: 1755129448159
+      isPrivate: false
+      description: ""
+      sortKey: -1755129436350
+    method: GET
+    headers:
+      - name: accept
+        value: application/json
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/items/3
+    name: replace_item
+    meta:
+      id: req_3c534f8d66ef4261837873014e16be1a
+      created: 1755129554572
+      modified: 1755129567854
+      isPrivate: false
+      description: ""
+      sortKey: -1755129554572
+    method: PUT
+    body:
+      text: '{   "name": "Produto C",   "image_url":
+        "http://example.com/imageC.jpg",   "description": "Descrição do Produto
+        C",   "price": 80.0,   "rating": 4.0,   "specifications": {     "cor":
+        "vermelho",     "tamanho": "P",     "peso": "0.8kg"   } }'
+      mimeType: application/json
+    headers:
+      - name: accept
+        value: application/json
+      - name: Content-Type
+        value: application/json
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/items/1
+    name: update_item
+    meta:
+      id: req_5adaa967363f4e37bc718bb218047d73
+      created: 1755129717455
+      modified: 1755129727983
+      isPrivate: false
+      description: ""
+      sortKey: -1755129717455
+    method: PATCH
+    body:
+      text: '{   "price": 9999.0 }'
+      mimeType: application/json
+    headers:
+      - name: accept
+        value: application/json
+      - name: Content-Type
+        value: application/json
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/items/1
+    name: delete_item
+    meta:
+      id: req_af69e9514912495b8bc3ebd8f0f71cad
+      created: 1755129780249
+      modified: 1755129787626
+      isPrivate: false
+      description: ""
+      sortKey: -1755129780249
+    method: DELETE
+    headers:
+      - name: accept
+        value: "*/*"
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_715451d3072681e6e20acae88c377ee448fb4cfa
+    created: 1755128936578
+    modified: 1755128936578
+environments:
+  name: Base Environment
+  meta:
+    id: env_715451d3072681e6e20acae88c377ee448fb4cfa
+    created: 1755128936576
+    modified: 1755128936576
+    isPrivate: false

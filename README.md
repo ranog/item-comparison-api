@@ -99,3 +99,19 @@ Após executar o projeto, a documentação interativa estará disponível nos se
 
 - Swagger UI: [http://127.0.0.1:8080/docs](http://127.0.0.1:8080/docs)
 - ReDoc: [http://127.0.0.1:8080/redoc](http://127.0.0.1:8080/redoc)
+
+### Collection Insomnia
+
+Para facilitar os testes da API, disponibilizamos uma collection do Insomnia que pode ser importada:
+
+1. Baixe o arquivo `insomnia-collection.yaml` da pasta `docs/`
+2. No Insomnia:
+   - Clique em `Create` > `Import from File`
+   - Selecione o arquivo baixado
+   - A collection será importada com todos os endpoints configurados
+
+A collection inclui:
+- Endpoints para criar itens
+- Endpoints para comparação
+- Exemplos de payloads
+- Variáveis de ambiente pré-configuradas
