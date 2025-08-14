@@ -115,3 +115,121 @@ A collection inclui:
 - Endpoints para comparação
 - Exemplos de payloads
 - Variáveis de ambiente pré-configuradas
+
+## 📐 Arquitetura do Projeto
+
+Para uma visão detalhada da arquitetura, incluindo diagramas e fluxos, consulte nossa [documentação de arquitetura](docs/architecture.md).
+
+### Visão Geral
+O projeto segue os princípios da Arquitetura Limpa (Clean Architecture), organizando o código em camadas bem definidas:
+
+```
+src/
+├── domain/         # Regras de negócio e entidades
+├── service_layer/  # Casos de uso e serviços
+├── adapters/       # Adaptadores e repositórios
+├── entrypoints/    # Controllers e rotas da API
+└── config/         # Configurações da aplicação
+```
+
+### Camadas da Arquitetura
+
+1. **Domain Layer (src/domain/)**
+   - Contém as entidades core do negócio (Item, Comparison)
+   - Define as regras de validação básicas
+   - Independente de frameworks e tecnologias
+
+2. **Service Layer (src/service_layer/)**
+   - Implementa os casos de uso da aplicação
+   - Orquestra as operações entre entidades
+   - Gerencia a lógica de negócio complexa
+
+3. **Adapters Layer (src/adapters/)**
+   - Implementa a persistência de dados
+   - Gerencia o repositório de itens
+   - Adapta interfaces externas para o domínio
+
+4. **Entrypoints Layer (src/entrypoints/)**
+   - Define os endpoints da API
+   - Gerencia requisições e respostas HTTP
+   - Implementa os handlers para cada operação
+
+### Endpoints Principais
+
+#### Items API
+- `GET /items` - Lista todos os itens
+- `GET /items/{item_id}` - Obtém detalhes de um item
+- `POST /items` - Cria um novo item
+- `PUT /items/{item_id}` - Atualiza um item completamente
+- `PATCH /items/{item_id}` - Atualiza um item parcialmente
+- `DELETE /items/{item_id}` - Remove um item
+
+#### Comparison API
+- `GET /items/compare?ids=[...]` - Compara múltiplos itens
+
+### Estrutura dos Dados
+
+#### Item
+```json
+{
+  "id": 1,
+  "name": "string",
+  "image_url": "http://example.com/image.jpg",
+  "description": "string",
+  "price": 0,
+  "rating": 0,
+  "specifications": {
+    "additionalProp1": "string"
+  }
+}
+```
+
+#### Comparison Response
+```json
+{
+  "items": [...],
+  "price_analysis": {
+    "lowest": 0,
+    "highest": 0,
+    "difference": 0
+  },
+  "rating_analysis": {
+    "lowest": 0,
+    "highest": 0,
+    "average": 0
+  },
+  "specifications_comparison": {
+    "property": {
+      "item_name": "value"
+    }
+  }
+}
+```
+
+## 🧪 Testes
+
+O projeto possui uma suíte completa de testes:
+
+### Estrutura de Testes
+```
+tests/
+├── unit/            # Testes unitários
+├── integration/     # Testes de integração
+└── e2e/            # Testes end-to-end
+```
+
+### Executando os Testes
+```bash
+# Executar todos os testes
+make tests
+```
+
+## 🔨 Tecnologias Utilizadas
+
+- **FastAPI**: Framework web moderno e rápido
+- **Pydantic**: Validação de dados e serialização
+- **Poetry**: Gerenciamento de dependências
+- **Pytest**: Framework de testes
+- **Ruff**: Linting e formatação de código
+- **Pre-commit**: Hooks de git para qualidade de código
+```
