@@ -100,6 +100,13 @@ Após executar o projeto, a documentação interativa estará disponível nos se
 - Swagger UI: [http://127.0.0.1:8080/docs](http://127.0.0.1:8080/docs)
 - ReDoc: [http://127.0.0.1:8080/redoc](http://127.0.0.1:8080/redoc)
 
+### Exemplos de Payloads
+
+Para facilitar os testes, disponibilizamos [exemplos de payloads](docs/payload-examples.md) para diferentes tipos de produtos:
+- Smartphones
+- Notebooks
+- Smartwatches
+
 ### Collection Insomnia
 
 Para facilitar os testes da API, disponibilizamos uma collection do Insomnia que pode ser importada:

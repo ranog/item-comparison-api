@@ -1,1 +1,92 @@
-[]
+[
+  {
+    "name": "iPhone 15 Pro",
+    "image_url": "https://example.com/iphone15pro.jpg",
+    "description": "O iPhone mais avançado com chip A17 Pro",
+    "price": 9499.0,
+    "rating": 4.8,
+    "specifications": {
+      "tela": "6.1 polegadas OLED",
+      "processador": "A17 Pro",
+      "armazenamento": "256GB",
+      "ram": "8GB",
+      "camera": "48MP + 12MP + 12MP",
+      "bateria": "3274 mAh",
+      "sistema": "iOS 17",
+      "cor": "Titânio Natural"
+    },
+    "id": 1
+  },
+  {
+    "name": "Samsung Galaxy S24 Ultra",
+    "image_url": "https://example.com/s24ultra.jpg",
+    "description": "O Galaxy mais poderoso com IA integrada",
+    "price": 9799.0,
+    "rating": 4.7,
+    "specifications": {
+      "tela": "6.8 polegadas Dynamic AMOLED",
+      "processador": "Snapdragon 8 Gen 3",
+      "armazenamento": "256GB",
+      "ram": "12GB",
+      "camera": "200MP + 12MP + 50MP + 10MP",
+      "bateria": "5000 mAh",
+      "sistema": "Android 14",
+      "cor": "Titanium Black"
+    },
+    "id": 2
+  },
+  {
+    "name": "Google Pixel 8 Pro",
+    "image_url": "https://example.com/pixel8pro.jpg",
+    "description": "O melhor do Android com IA do Google",
+    "price": 8999.0,
+    "rating": 4.6,
+    "specifications": {
+      "tela": "6.7 polegadas LTPO OLED",
+      "processador": "Google Tensor G3",
+      "armazenamento": "256GB",
+      "ram": "12GB",
+      "camera": "50MP + 48MP + 48MP",
+      "bateria": "5050 mAh",
+      "sistema": "Android 14",
+      "cor": "Obsidian"
+    },
+    "id": 3
+  },
+  {
+    "name": "MacBook Pro 14",
+    "image_url": "https://example.com/macbook14.jpg",
+    "description": "MacBook Pro com chip M3 Pro",
+    "price": 14999.0,
+    "rating": 4.9,
+    "specifications": {
+      "processador": "Apple M3 Pro",
+      "memoria": "32GB RAM",
+      "armazenamento": "512GB SSD",
+      "tela": "14.2 polegadas Liquid Retina XDR",
+      "gpu": "GPU 18-core",
+      "sistema": "macOS Sonoma",
+      "bateria": "22 horas",
+      "peso": "1.55 kg"
+    },
+    "id": 4
+  },
+  {
+    "name": "Dell XPS 13 Plus",
+    "image_url": "https://example.com/xps13plus.jpg",
+    "description": "Ultrabook premium com Intel Core de 13ª geração",
+    "price": 12499.0,
+    "rating": 4.7,
+    "specifications": {
+      "processador": "Intel Core i7-1360P",
+      "memoria": "16GB RAM LPDDR5",
+      "armazenamento": "512GB NVMe SSD",
+      "tela": "13.4 polegadas 4K Touch",
+      "gpu": "Intel Iris Xe",
+      "sistema": "Windows 11 Pro",
+      "bateria": "12 horas",
+      "peso": "1.26 kg"
+    },
+    "id": 5
+  }
+]
